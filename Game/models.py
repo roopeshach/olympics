@@ -93,4 +93,18 @@ class Comment(models.Model):
         return self.stream.name 
 
     
+class News(models.Model):
+    title = models.CharField(max_length=100)
+    image = models.ImageField(upload_to='news')
+    description = models.TextField()
+
+    added_on = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.title
+
+    def get_absolute_url(self):
+        return reverse('Game:news-detail', args=[str(self.id)])
+
+
 

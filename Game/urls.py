@@ -14,4 +14,7 @@ urlpatterns = [
     path('stream-page/<int:id>', views.stream_page, name='stream-page'),
     path('add-comment', views.add_comment, name='add-comment'),
     path('add-visit/<int:id>', views.add_visit, name='add-visit'),
+
+    path('news', views.news, name='news'),
+    path('news-detail/<int:id>', views.news_detail, name='news-detail'),
 ]

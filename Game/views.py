@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .models import Game, MatchPlayer, MatchSummary, Player , Match, Stream, Comment
+from .models import Game, MatchPlayer, MatchSummary, Player , Match, Stream, Comment, News
 # Create your views here.
 from django.http import  JsonResponse
 
@@ -98,3 +98,18 @@ def match_detail(request, id):
         'players':players
     }
     return render(request , 'Game/match_details.html', context)
+
+
+def news(request):
+    news = News.objects.all()
+    context = {
+        'news': news
+    }
+    return render(request, 'Game/news.html', context)
+
+def news_detail(request, id):
+    news = News.objects.get(id=id)
+    context = {
+        'news': news
+    }
+    return render(request, 'Game/news_detail.html', context)
