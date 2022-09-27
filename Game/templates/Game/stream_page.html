@@ -1,0 +1,162 @@
+{% include 'Authentication/base.html' %}
+<title> Beijing 2022 - {{stream.name}} </title>
+<h1 class="text-center text-danger">
+    {{stream.name}}
+</h1>
+<hr class="my-5" />
+
+
+<div class="row">
+    <div class="col-md-12 d-flex">
+        <div class="col-md-7">
+            <!--DIsplay video with cnotrols-->
+            <video id="video" class="" controls preload="auto" width="870" height="564" poster="{{stream.image.url}}"
+                data-setup="{}">
+                <source src="{{stream.video.url}}" type="video/mp4">
+
+            </video>
+
+
+        </div>
+
+        <div class="col-md-4">
+            <!-- COmments Section -->
+            <h3 class="text-success">Comments</h3>
+            <hr class="my-5" />
+            <div class="card">
+                <div class="card-body">
+                   {% for c in comments %}
+                   <div class="row" id="comments">
+                    <div class="col-md-3">
+                        <img src="https://image.ibb.co/jw55Ex/def_face.jpg"
+                            class="img img-rounded img-fluid"  width="70px" height="70"/>
+                        <p class="text-secondary text-center">
+                            {{c.added_on | timesince}} ago</p>
+
+                        </p>
+                    </div>
+                    <div class="col-md-9">
+                        <p>
+                            <a class="float-left text-danger" href="#"><strong>{{c.user}}</strong></a>
+                        </p>
+                        
+                        <div class="clearfix"></div>
+                        <p>{{c.text}}</p>
+                        <hr>
+                       
+                    </div>
+                </div>
+                   {% endfor %}
+                </div>
+
+                <div class="card-footer">
+                    <div class="input-group text-center">
+                        <form method="POST">
+                        <input type="hidden" name="csrfmiddlewaretoken" value="{{ csrf_token }}">
+                        <input type="hidden" name="stream_id" value="{{ stream.id }}">
+                        <input type="text" class="form-control" name="comment" placeholder="Add a comment" rows="3" />
+                        <div class="input-group-append">
+                            <button class="btn btn-success mt-3" type="button" id="comment" >Send</button>
+                        </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+            
+
+                        <hr class="my-5" />
+                        <div class="row">
+                            <div class="col-md-12 d-flex">
+
+                                <div class="col-md-12">
+                                    <h3 class="text-primary text-center ml-5">Stream Details</h3>
+                                    <table class="table  m-3 mt-5">
+                                        <thead>
+                                            <tr>
+                                                <th>Stream Name </th>
+                                                <td>{{stream.name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Game </th>
+                                                <td>{{stream.match.game.name}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Match Date</th>
+                                                <td>{{stream.match.date}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Match Time </th>
+                                                <td>{{stream.match.time}}</td>
+                                            </tr>
+                                            <tr>
+                                                <th>Stadium</th>
+                                                <td>{{stream.match.stadium}}</td>
+                                            </tr>
+
+                                            <tr>
+                                                <th>Description</th>
+                                                <td>{{stream.description}}</td>
+                                            </tr>
+                                        </thead>
+
+
+                                    </table>
+                                </div>
+                            </div>
+                        </div>
+
+     
+                        {% include 'Game/footer.html' %}
+                        <script src="https://code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>  
+<script>
+    $(document).ready(function(){
+        $("#comment").click(function(){
+            var comment = $("input[name=comment]").val();
+            var stream_id = $("input[name=stream_id]").val();
+            var csrf_token = $("input[name=csrfmiddlewaretoken]").val();
+            $.ajax({
+                url: "{% url 'Game:add-comment' %}",
+                type: "POST",
+                data: {
+                    'comment': comment,
+                    'stream_id': stream_id,
+                    'csrfmiddlewaretoken': csrf_token
+                },
+                success: function(response){
+                    console.log(response);
+                    location.reload();
+                    
+                },
+                error: function(error){
+                    console.log(error);
+                }
+            });
+        });
+    });
+
+    //implement page visits counter
+    $(document).ready(function(){
+
+        
+        $.ajax({
+            url: "{% url 'Game:add-visit' stream.id %}",
+            type: "GET",
+            
+            success: function(response){
+                console.log(response);
+
+            },
+            error: function(error){
+                console.log(error);
+            }
+        });
+    });
+   
+
+
+
+</script>

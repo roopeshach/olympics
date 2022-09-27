@@ -1,0 +1,148 @@
+<!-- Font Awesome -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+  rel="stylesheet"
+/>
+<!-- Google Fonts -->
+<link
+  href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,700&display=swap"
+  rel="stylesheet"
+/>
+<!-- MDB -->
+<link
+  href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/5.0.0/mdb.min.css"
+  rel="stylesheet"
+/>
+
+
+<!-- Navbar -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <!-- Container wrapper -->
+  <div class="container">
+    <!-- Navbar brand -->
+    <a class="navbar-brand me-2" href="/">
+      <img
+        src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fbitterwinter.org%2Fwp-content%2Fuploads%2F2019%2F02%2F2022-Beijing-Winter-Olimpics-logo.jpg&f=1&nofb=1&ipt=90792e51ddc1f9713366e7f2abd51f86b999727a73eee3722831ef8156b02229&ipo=images"
+        height="65"
+        alt="Olympics Logo"
+        loading="lazy"
+        style="margin-top: -1px;"
+      />
+    </a>
+
+    <!-- Toggle button -->
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-mdb-toggle="collapse"
+      data-mdb-target="#navbarButtonsExample"
+      aria-controls="navbarButtonsExample"
+      aria-expanded="false"
+      aria-label="Toggle navigation"
+    >
+      <i class="fas fa-bars"></i>
+    </button>
+
+    <!-- Collapsible wrapper -->
+    <div class="collapse navbar-collapse" id="navbarButtonsExample">
+      <!-- Left links -->
+     
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
+        
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Game:game' %}">Games</a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Game:match' %}">Matches </a>
+        </li>
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Game:player' %}">Players</a>
+        </li>
+
+
+
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Game:match-summary' %}">Matches Summary</a>
+        </li>
+
+        {% if user.is_authenticated %}
+        <li class="nav-item">
+          <a class="nav-link" href="{% url 'Game:stream' %}">LIVE STREAMS</a>
+        </li>
+        {% endif %}
+      </ul>
+     
+      <!-- Left links -->
+
+    
+    </div>
+    <!-- Collapsible wrapper -->
+
+
+    <!-- Right elements -->
+    <div class="d-flex align-items-center">
+      {% if user.is_authenticated %}
+        <h5 class="text-primary mx-3"> Hello, {{user.first_name}} </h5>
+      {% endif %}
+  
+  
+      <!-- Avatar -->
+      <div class="dropdown">
+        <a
+          class="dropdown-toggle d-flex align-items-center hidden-arrow"
+          href="#"
+          id="navbarDropdownMenuAvatar"
+          role="button"
+          data-mdb-toggle="dropdown"
+          aria-expanded="false"
+        >
+          <img
+            src="https://mdbcdn.b-cdn.net/img/new/avatars/2.webp"
+            class="rounded-circle"
+            height="25"
+            alt="Black and White Portrait of a Man"
+            loading="lazy"
+          />
+        </a>
+        <ul
+          class="dropdown-menu dropdown-menu-end"
+          aria-labelledby="navbarDropdownMenuAvatar"
+        >
+         
+
+          {% if user.is_authenticated  %}
+          <li>
+            <a class="dropdown-item" href="#">My profile</a>
+          </li>
+        
+          <li>
+            <a class="dropdown-item" href="{% url 'Authentication:logout' %}">Logout</a>
+          </li>
+          {% else %}
+          <li>
+            <a class="dropdown-item" href="{% url 'Authentication:login' %}">Login</a>
+          </li>
+
+          <li>
+            <a class="dropdown-item" href="{% url 'Authentication:register' %}">Register</a>
+          </li>
+          
+          {% endif %}
+          
+        
+       
+        </ul>
+      </div>
+    </div>
+    <!-- Right elements -->
+  </div>
+  <!-- Container wrapper -->
+</nav>
+<!-- Navbar -->
+<div class=" m-5 ml-5 mr-5 mb-5">
+  <div style="margin:50px;" class="card  border border-primary shadow">
+    <div class="card-body">

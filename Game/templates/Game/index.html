@@ -1,0 +1,182 @@
+{% include 'Authentication/base.html' %}
+
+<title> Beijing 2022 </title>
+
+      
+    <!--Main Navigation-->
+
+    <!--Main layout-->
+    <main class="mt-5">
+      <div class="container">
+        <!--Section: Content-->
+        <section>
+          <div class="row">
+            <div class="col-md-6 gx-5 mb-4">
+              <div class="bg-image hover-overlay ripple shadow-2-strong rounded-5" data-mdb-ripple-color="light">
+                <img src="https://external-content.duckduckgo.com/iu/?u=https%3A%2F%2Fapi.time.com%2Fwp-content%2Fuploads%2F2014%2F05%2Folympics-london-rio.jpg%3Fquality%3D85%26w%3D1200%26h%3D628%26crop%3D1&f=1&nofb=1&ipt=5cad14dab7c236243cf0b43b3bc02818a216b80b995d6dd7b04fce15cfe453eb&ipo=images" class="img-fluid" />
+                <a href="#!">
+                  <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                </a>
+              </div>
+            </div>
+
+            <div class="col-md-6 gx-5 mb-4">
+              <h4><strong>Beijing Olympics 2022</strong></h4>
+              <p class="text-muted">
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Facilis consequatur
+                eligendi quisquam doloremque vero ex debitis veritatis placeat unde animi laborum
+                sapiente illo possimus, commodi dignissimos obcaecati illum maiores corporis.
+              </p>
+              <p><strong>Doloremque vero ex debitis veritatis?</strong></p>
+              <p class="text-muted">
+                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quod itaque voluptate
+                nesciunt laborum incidunt. Officia, quam consectetur. Earum eligendi aliquam illum
+                alias, unde optio accusantium soluta, iusto molestiae adipisci et?
+              </p>
+            </div>
+          </div>
+        </section>
+        <!--Section: Content-->
+
+        <hr class="my-5" />
+
+        <!--Section: Content-->
+        <section class="text-center">
+          <h4 class="mb-5"><strong>Games in this Olympics.</strong></h4>
+
+          <div class="row">
+            
+            {% for g in games %}
+            <div class="col-lg-3 col-md-12 mb-4">
+              <div class="card">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                  <img
+                    src="{{g.image.url}}"
+                    class="img-fluid"
+                  />
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{g.name}}</h5>
+                  <p class="card-text">
+                    {{g.description}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+         
+
+            
+          </div>
+        </section>
+        <!--Section: Content-->
+
+        <hr class="my-5" />
+
+           <!--Section: Content-->
+           <section class="text-center">
+            <h4 class="mb-5"><strong>Matches in this Olympics.</strong></h4>
+  
+            <div class="row">
+              
+              {% for g in matches %}
+              <div class="col-lg-3 col-md-12 mb-4">
+                <div class="card">
+                  <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                    <img
+                      src="{{g.image.url}}"
+                      class="img-fluid"
+                    />
+                    <a href="#!">
+                      <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                    </a>
+                  </div>
+                  <div class="card-body">
+                    <h5 class="card-title">{{g.game.name}} - {{g.date}}</h5>
+                    <p class="card-text">
+                      {{g.description}}
+                    </p>
+                    <a href="{% url 'Game:match-detail' g.id %}" class="btn btn-success" > View Details </a>
+                  </div>
+                </div>
+              </div>
+              {% endfor %}
+  
+           
+  
+              
+            </div>
+          </section>
+          <!--Section: Content-->
+  
+          <hr class="my-5" />
+
+             <!--Section: Content-->
+        <section class="text-center">
+          <h4 class="mb-5"><strong>Match Summaries</strong></h4>
+
+          <div class="row">
+            
+            {% for g in summaries %}
+            <div class="col-lg-4 col-md-12 mb-4">
+              <div class="card">
+                <div class="bg-image hover-overlay ripple" data-mdb-ripple-color="light">
+                  <img
+                    src="{{g.match.image.url}}"
+                    class="img-fluid"
+                  />
+                  <a href="#!">
+                    <div class="mask" style="background-color: rgba(251, 251, 251, 0.15);"></div>
+                  </a>
+                </div>
+                <div class="card-body">
+                  <h5 class="card-title">{{g.name}}</h5>
+                  <p class="card-text">
+                    <small class="text-muted">
+                       Date : <span class="text-success text-bold mx-2"> {{g.match.date}} </span>
+                       
+                       Time : <span class="text-success text-bold"> {{g.match.time}} </span>
+                       <hr>
+                       Stadium : <span class="text-success text-bold"> {{g.match.stadium}} </span>
+                    </small>
+    
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                            <th class="text-alert"> Gold Medal </th>
+                            <th class="text-alert"> Silver Medal </th>
+                            <th class="text-alert"> Bronze Medal </th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td> {{g.gold_winner}}</td>
+                                <td> {{g.silver_winner}}</td>
+                                <td> {{g.bronze_winner}}</td>
+                            </tr>
+                        </tbody>
+    
+                    </table>
+                  </p>
+                  <p class="card-text">
+                    {{g.description}}
+                  </p>
+                </div>
+              </div>
+            </div>
+            {% endfor %}
+
+         
+
+            
+          </div>
+        </section>
+        <!--Section: Content-->
+
+        <hr class="my-5" />
+
+{% include 'Game/footer.html' %}

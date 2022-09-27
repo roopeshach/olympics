@@ -1,0 +1,44 @@
+{% include 'Authentication/base.html' %}
+
+<title> Beijing 2022 - LIVE STREAMS </title>
+
+<h5 class="text-center text-primary">
+    LIVE STREAMS  of Matches Olympics 2022
+</h5>
+<hr>
+
+<!--display games in list og cards with image, title, date , and stadium-->
+
+<div class="row">
+    {% for s in streams %}
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <img src="{{s.image.url}}" class="card-img-top" alt="{{s.match.game.name}}"/>
+            <div class="card-body">
+              <h5 class="card-title">{{s.match.game.name}}</h5>
+              
+              <p class="card-text">
+                <small class="text-muted">
+                   Date : <span class="text-danger text-bold mx-2"> {{s.match.date}} </span>
+                   
+                   Time : <span class="text-danger text-bold"> {{s.match.time}} </span>
+                   <hr>
+                   Stadium : <span class="text-danger text-bold"> {{s.match.stadium}} </span>
+                </small>
+              </p>
+              <p class="card-text">
+                {{s.description}}
+              </p>
+              <a href="{% url 'Game:stream-page' s.id %}" class="btn btn-danger" > View Details </a>
+            </div>
+          </div>
+          
+    </div>
+    {% endfor %}
+    <hr>
+</div>
+
+
+
+
+{% include 'Game/footer.html' %}

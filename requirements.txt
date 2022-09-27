@@ -1,0 +1,6 @@
+asgiref==3.5.2
+Django==4.1.1
+django-admin-black==0.0.1
+django-jazzmin==2.5.0
+Pillow==9.2.0
+sqlparse==0.4.3

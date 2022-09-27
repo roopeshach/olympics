@@ -1,0 +1,44 @@
+{% include 'Authentication/base.html' %}
+
+<title> Beijing 2022 - Matches </title>
+
+<h5 class="text-center text-primary">
+    Matches of Olympics 2022
+</h5>
+<hr>
+
+<!--display games in list og cards with image, title, date , and stadium-->
+
+<div class="row">
+    {% for match in matches %}
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <img src="{{match.image.url}}" class="card-img-top" alt="{{match.game.name}}"/>
+            <div class="card-body">
+              <h5 class="card-title">{{match.game.name}}</h5>
+              
+              <p class="card-text">
+                <small class="text-muted">
+                   Date : <span class="text-success text-bold mx-2"> {{match.date}} </span>
+                   
+                   Time : <span class="text-success text-bold"> {{match.time}} </span>
+                   <hr>
+                   Stadium : <span class="text-success text-bold"> {{match.stadium}} </span>
+                </small>
+              </p>
+              <p class="card-text">
+                {{match.description}}
+              </p>
+              <a href="{% url 'Game:match-detail' match.id %}" class="btn btn-success" > View Details </a>
+            </div>
+          </div>
+          
+    </div>
+    {% endfor %}
+    <hr>
+</div>
+
+
+
+
+{% include 'Game/footer.html' %}

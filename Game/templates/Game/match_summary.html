@@ -1,0 +1,59 @@
+{% include 'Authentication/base.html' %}
+<title> Beijing 2022 - Match Summaries </title>
+<h5 class="text-center text-primary">
+    Matches Summary of Olympics 2022
+</h5>
+<hr>
+
+<!--display games in list og cards with image, title, date , and stadium-->
+
+<div class="row">
+    {% for summary in summaries %}
+    <div class="col-md-6">
+        <div class="card mb-3">
+            <img src="{{summary.match.image.url}}" class="card-img-top" alt="{{summary.match.game.name}}"/>
+            <div class="card-body">
+              <h5 class="card-title">{{summary.match.game.name}}</h5>
+              
+              <p class="card-text">
+                <small class="text-muted">
+                   Date : <span class="text-success text-bold mx-2"> {{summary.match.date}} </span>
+                   
+                   Time : <span class="text-success text-bold"> {{summary.match.time}} </span>
+                   <hr>
+                   Stadium : <span class="text-success text-bold"> {{summary.match.stadium}} </span>
+                </small>
+
+                <table class="table table-bordered">
+                    <thead>
+                        <tr>
+                        <th class="text-alert"> Gold Medal </th>
+                        <th class="text-alert"> Silver Medal </th>
+                        <th class="text-alert"> Bronze Medal </th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td> {{summary.gold_winner}}</td>
+                            <td> {{summary.silver_winner}}</td>
+                            <td> {{summary.bronze_winner}}</td>
+                        </tr>
+                    </tbody>
+
+                </table>
+              </p>
+              <p class="card-text">
+                {{summary.description}}
+              </p>
+            </div>
+          </div>
+          
+    </div>
+    {% endfor %}
+    <hr>
+</div>
+
+
+
+
+{% include 'Game/footer.html' %}

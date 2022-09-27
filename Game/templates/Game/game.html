@@ -1,0 +1,39 @@
+
+{% include 'Authentication/base.html' %}
+
+<title> Beijing 2022 - Games </title>
+
+<h5 class="text-center text-primary">
+    Games of Olympics 2022
+</h5>
+<hr>
+
+<!--display games in list og cards with image, title, date , and stadium-->
+
+<div class="row">
+    {% for game in games %}
+    <div class="col-md-4">
+        <div class="card mb-3">
+            <img src="{{game.image.url}}" class="card-img-top" alt="Wild Landscape"/>
+            <div class="card-body">
+              <h5 class="card-title">{{game.name}}</h5>
+              <p class="card-text">
+                {{game.description}}
+              </p>
+              <p class="card-text">
+                <small class="text-muted">
+                    Matches Available : <span class="text-success text-bold"> {{game.get_matches.count}} </span>
+                </small>
+              </p>
+            </div>
+          </div>
+          
+    </div>
+    {% endfor %}
+    <hr>
+</div>
+
+
+
+
+{% include 'Game/footer.html' %}
