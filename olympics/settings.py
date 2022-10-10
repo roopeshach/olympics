@@ -39,7 +39,9 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     'Authentication',
-    'Game'
+    'Game',
+    'rest_framework',
+    'khalti',
 ]
 
 JAZZMIN_UI_TWEAKS = {
@@ -167,3 +169,10 @@ MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
 LOGIN_URL = '/login'
+
+
+
+
+
+KHALTI_SECRET_KEY = "test_secret_key_8ea68060667d43a793615050dcc93526"
+KHALTI_VERIFY_URL = "https://khalti.com/api/v2/payment/verify/"

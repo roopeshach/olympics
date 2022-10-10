@@ -26,6 +26,7 @@ urlpatterns = [
     path('admin/', admin.site.urls),
     path('', include(('Authentication.urls', 'Authentication'), namespace='Authentication')),
     path('', include(('Game.urls', 'Game'), namespace='Game')),
+    path('khalti/', include('khalti.urls')),
 
 ] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
 
